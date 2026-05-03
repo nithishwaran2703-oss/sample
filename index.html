@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanakkam Vandhanam | Traditional Tamil Decor & Supplies</title>
+    <meta name="description"
+        content="Premium traditional Tamil decor products, auspicious ceremony supplies, and cultural celebration items rooted in heritage.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Tiro+Tamil:ital@0;1&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+</head>
+
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Thoranam Hanging Garland -->
+    <img src="image.png" alt="Traditional Thoranam" class="thoranam-banner" id="thoranamBanner">
+
+    <!-- Premium Loader -->
+    <div class="loader">
+        <img src="logo.png" alt="Vanakkam Vandhanam Logo - வணக்கம்! வந்தனம்" fetchpriority="high"
+            style="height: 120px; width: auto; margin-bottom: 1.5rem; filter: drop-shadow(0 4px 15px rgba(255,179,0,0.4)); background: white; padding: 15px; border-radius: 12px;">
+        <div class="loader-text font-serif">
+            <span style="display: block; line-height: 1;">Vanakkam <span class="text-gold">Vandhanam</span></span>
+            <div class="loader-subtitle" style="font-size: 1rem; margin-top: 0.5rem; letter-spacing: 0.1em; color: var(--text-light);">Party-na 🙏 Vanakkam Vandhanam dhaan !</div>
+        </div>
+        <div class="loader-progress"></div>
+    </div>
+
+    <!-- Canvas for Particle Animation -->
+    <canvas id="particles-canvas"></canvas>
+
+    <div class="cursor"></div>
+    <div class="cursor-follower">
+        <svg class="cursor-progress" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--accent-gold)" stroke-width="2"
+                stroke-dasharray="283" stroke-dashoffset="283"></circle>
+        </svg>
+    </div>
+
+    <!-- Background Animated Blobs -->
+    <div class="bg-blobs">
+        
+        <!-- Floating Ornaments for "More Dots/Particles" feel -->
+        <div class="floating-ornament" style="top: 15%; left: 5%;">🪔</div>
+        <div class="floating-ornament" style="top: 35%; right: 8%;">✨</div>
+        <div class="floating-ornament" style="top: 65%; left: 10%;">🪷</div>
+        <div class="floating-ornament" style="bottom: 15%; right: 12%;">🌟</div>
+        <div class="floating-ornament" style="top: 85%; left: 50%;">✨</div>
+    </div>
+
+    <!-- Advanced Cursor Hover Reveal Image -->
+    <img src="" alt="" class="hover-preview-img" id="hoverPreviewImg">
+
+    <nav class="navbar">
+        <div class="logo" style="display: flex; align-items: center; gap: 12px;">
+            <img src="logo.png" alt="Logo - வணக்கம்! வந்தனம்" fetchpriority="high">
+            <div class="logo-info" style="display: flex; flex-direction: column; justify-content: center;">
+                <span class="logo-text font-serif" style="line-height: 1; font-size: 1.5rem; font-weight: 700;">Vanakkam <span class="accent">Vandhanam</span></span>
+                <span class="logo-tagline">Party-na 🙏 Vanakkam Vandhanam dhaan !</span>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about" class="magnetic" data-strength="20">About Us</a></li>
+            <li><a href="#gallery" class="magnetic" data-strength="20">Products</a></li>
+            <li><a href="#services" class="magnetic" data-strength="20">Categories</a></li>
+            <li><a href="#why-us" class="magnetic" data-strength="20">Why Us?</a></li>
+        </ul>
+        <a href="https://wa.me/919788742627" target="_blank" class="btn-primary magnetic" data-strength="40">Contact for
+            Purchase</a>
+
+        <div class="hamburger" id="hamburgerBtn">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-inner">
+            <div class="mobile-menu-header">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <img src="logo.png" alt="Logo - வணக்கம்! வந்தனம்" style="height: 55px; width: auto; background: white; padding: 5px; border-radius: 5px;">
+                    <div class="logo-info" style="display: flex; flex-direction: column;">
+                        <span class="logo-text font-serif" style="line-height: 1; font-size: 1.3rem; font-weight: 700;">Vanakkam <span class="accent">Vandhanam</span></span>
+                        <span class="logo-tagline" style="font-size: 0.6rem; color: var(--text-light); margin-top: 2px;">Party-na 🙏 Vanakkam Vandhanam dhaan !</span>
+                    </div>
+                </div>
+                <button class="mobile-close" id="mobileClose">&times;</button>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#gallery">Products</a></li>
+                <li><a href="#services">Categories</a></li>
+                <li><a href="#why-us">Why Us?</a></li>
+                <li><a href="#contact-us">Contact</a></li>
+            </ul>
+            <a href="https://wa.me/919788742627" target="_blank" class="btn-primary"
+                style="width:100%;text-align:center;margin-top:2rem;">Contact for Purchase</a>
+        </div>
+    </div>
+
+    <header class="hero">
+
+        <div class="hero-bg-wrapper">
+            <img loading="lazy" decoding="async" src="assets/wedding_bg.jpg"
+                alt="Premium Decoration Collection" class="bg-img" />
+            <div class="hero-overlay"></div>
+        </div>
+
+        <div class="hero-content">
+
+            <h1 class="hero-title">
+                <div class="line-mask">
+                    <div class="line-content">CELEBRATIONS</div>
+                </div>
+                <div class="line-mask">
+                    <div class="line-content"><span class="italic-serif text-gold">SUPPLIES</span></div>
+                </div>
+            </h1>
+            <p class="hero-subtitle reveal-text delay-1">From traditional brass lamps to designer balloons. Buy premium
+                decoration supplies including diyas, thoranams, and artificial marigolds online.
+            </p>
+            <div class="brand-signature reveal-text delay-1-5">
+                Party-na 🙏 <span class="text-gold">Vanakkam Vandhanam</span> dhaan !
+            </div>
+            <div class="hero-actions reveal-text delay-2">
+                <a href="https://wa.me/919788742627" target="_blank" class="btn-primary glow-effect magnetic" data-strength="40">Contact for Purchase</a>
+                <button class="btn-secondary play-btn magnetic" data-strength="30" id="openStylist">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
+                    </svg>
+                    Product Guide
+                </button>
+            </div>
+        </div>
+
+
+    </header>
+
+    <div class="hero-curtain"></div>
+
+    <div class="marquee-section relative-z">
+        <div class="marquee-content font-tamil">
+            <span>Party-na 🙏 Vanakkam Vandhanam dhaan !</span>
+            <span>✨</span>
+            <span>Party-na 🙏 Vanakkam Vandhanam dhaan !</span>
+            <span>✨</span>
+            <span>Party-na 🙏 Vanakkam Vandhanam dhaan !</span>
+            <span>✨</span>
+        </div>
+    </div>
+
+
+
+    <!-- Wave Divider: Hero to Emmaip Pattri -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+            <path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,15 1440,30 L1440,60 L0,60Z" fill="#FFFFFF" />
+        </svg>
+    </div>
+
+    <section id="about" class="digital-section relative-z">
+        <div class="digital-container reveal-on-scroll">
+            <div class="section-header text-center">
+                <h2 class="section-title">Heritage <span class="italic-serif gradient-text">Goes Digital</span></h2>
+                <div class="section-divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-ornament">🏮</div>
+                    <div class="divider-line"></div>
+                </div>
+                <p class="section-subtitle">Digital Heritage • Bringing centuries of tradition to your modern screen.</p>
+            </div>
+            
+            <div class="about-narrative reveal-on-scroll">
+                <p class="premium-para">
+                    At <span class="highlight">Vanakam Vandhanam</span>, we believe that tradition should not be bound by distance or time. Our digital platform serves as a bridge between the **ancient artistry of Tamil Nadu** and your celebration, offering a meticulously curated showcase of premium decor. Every piece in our collection—from the intricate brass lamps hand-carved by master artisans to our temple-grade silk garlands—is a testament to our commitment to **absolute quality and cultural authenticity**. 
+                </p>
+                <p class="premium-para mt-4">
+                    By transitioning into a dedicated **Product Showcase**, we have prioritized a seamless digital experience where you can explore the finest heritage items with high-definition clarity. We ensure that the soul of tradition is preserved in every digital interaction, providing **secure global delivery**, **expert styling guidance**, and a **transparent inquiry process**. Whether you are planning a grand wedding or a quiet housewarming, our web platform brings the grandeur of the Chola era and the warmth of traditional Tamil hospitality directly to your fingertips, ensuring that your most sacred moments are adorned with the excellence they deserve.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wave Divider: Emmaip Pattri to Stats -->
+    <div class="wave-divider flip">
+        <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+            <path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,15 1440,30 L1440,60 L0,60Z" fill="#FFFFFF" />
+        </svg>
+    </div>
+
+    <section id="why-us" class="stats-section parallax-section relative-z">
+        <div class="stats-container stagger-reveal reveal-on-scroll">
+            <div class="stat-item magnetic" data-strength="15">
+                <h3 class="counter" data-target="5000">0</h3><span>+</span>
+                <p>Orders Delivered</p>
+            </div>
+            <div class="stat-item magnetic" data-strength="15">
+                <h3 class="counter" data-target="500">0</h3><span>+</span>
+                <p>Premium Items</p>
+            </div>
+            <div class="stat-item magnetic" data-strength="15">
+                <h3 class="counter" data-target="100">0</h3><span>%</span>
+                <p>Happy Customers</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="gallery" class="gallery-section relative-z">
+        <div class="section-header text-center reveal-on-scroll">
+            <h2 class="section-title" id="packages">Trending <span class="italic-serif text-gold">Products</span>
+            </h2>
+            <div class="section-divider">
+                <div class="divider-line"></div>
+                <div class="divider-ornament">🪔</div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle">Featured Items • Shop premium decoration supplies online.</p>
+
+            <div class="filter-btns">
+                <button class="filter-btn active magnetic" data-filter="all" data-strength="10">All Items</button>
+                <button class="filter-btn magnetic" data-filter="balloons" data-strength="10">Balloons</button>
+                <button class="filter-btn magnetic" data-filter="traditional" data-strength="10">Traditional</button>
+                <button class="filter-btn magnetic" data-filter="props" data-strength="10">Props</button>
+            </div>
+        </div>
+
+        <div class="product-grid">
+            <div class="product-card reveal-on-scroll" data-category="traditional">
+                <div class="product-img">
+                    <img loading="lazy" decoding="async" src="assets/lamps.png" alt="Kuthuvilakku" loading="lazy">
+                    <span class="product-badge">Bestseller</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">⭐ 4.9 (120 Reviews)</div>
+                    <h3 class="font-serif">Premium Brass Kuthuvilakku (Pair)</h3>
+                    <p>Authentic 3ft tall traditional brass lamps for auspicious beginnings.</p>
+                    <button class="btn-primary w-full magnetic" data-strength="20">Contact for Purchase</button>
+                </div>
+            </div>
+
+            <div class="product-card reveal-on-scroll" data-category="balloons">
+                <div class="product-img">
+                    <img loading="lazy" decoding="async" src="assets/balloons.png" alt="Balloonகள்" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">⭐ 4.8 (85 Reviews)</div>
+                    <h3 class="font-serif">Pastel Balloon Arch Kit (100pcs)</h3>
+                    <p>DIY premium latex balloons in mint, peach, and gold with arch strip.</p>
+                    <button class="btn-primary w-full magnetic" data-strength="20">Contact for Purchase</button>
+                </div>
+            </div>
+
+            <div class="product-card reveal-on-scroll" data-category="traditional">
+                <div class="product-img">
+                    <img loading="lazy" decoding="async" src="assets/garlands.png" alt="Thoranam" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">⭐ 4.9 (200 Reviews)</div>
+                    <h3 class="font-serif">Artificial Mango Leaf Thoranam</h3>
+                    <p>Washable, highly realistic 3-meter traditional door hanging.</p>
+                    <button class="btn-primary w-full magnetic" data-strength="20">Contact for Purchase</button>
+                </div>
+            </div>
+
+            <div class="product-card reveal-on-scroll" data-category="props">
+                <div class="product-img">
+                    <img loading="lazy" decoding="async" src="assets/event_1.png"
+                        alt="Neon Sign" loading="lazy">
+                    <span class="product-badge">New</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">⭐ 4.7 (45 Reviews)</div>
+                    <h3 class="font-serif">'Happy Birthday' Warm Neon Sign</h3>
+                    <p>High-quality acrylic LED sign perfect for photo backdrops.</p>
+                    <button class="btn-primary w-full magnetic" data-strength="20">Contact for Purchase</button>
+                </div>
+            </div>
+
+            <div class="product-card reveal-on-scroll" data-category="traditional">
+                <div class="product-img">
+                    <img loading="lazy" decoding="async" src="assets/garlands.png" alt="Marigold" loading="lazy">
+                    <span class="product-badge">Trending</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">⭐ 5.0 (310 Reviews)</div>
+                    <h3 class="font-serif">Fluffy Artificial Marigold (Set of 5)</h3>
+                    <p>Vibrant 5ft long yellow and orange garlands for festive draping.</p>
+                    <button class="btn-primary w-full magnetic" data-strength="20">Contact for Purchase</button>
+                </div>
+            </div>
+
+            <div class="product-card reveal-on-scroll" data-category="props">
+                <div class="product-img">
+                    <img loading="lazy" decoding="async" src="assets/backdrops.png"
+                        alt="Backdrop Stand" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">⭐ 4.8 (95 Reviews)</div>
+                    <h3 class="font-serif">Gold Metal Ring Backdrop Stand</h3>
+                    <p>Adjustable 6ft circular arch stand, perfect for floral and balloon setups.</p>
+                    <button class="btn-primary w-full magnetic" data-strength="20">Contact for Purchase</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="custom-vision-box reveal-on-scroll">
+            <h3 class="font-serif">Looking for Custom Products?</h3>
+            <p>Our product gallery is just the beginning. We specialize in bringing unique, custom-made celebration
+                supplies to life. Let's build your dream kit together.</p>
+            <a href="https://wa.me/919788742627" target="_blank" class="btn-primary magnetic" data-strength="20">Contact
+                Our Team</a>
+        </div>
+    </section>
+
+    <section class="curated-section relative-z">
+        <div class="section-header text-center reveal-on-scroll">
+            <h2 class="section-title">Curated <span class="italic-serif text-gold">Collections</span></h2>
+            <div class="section-divider">
+                <div class="divider-line"></div>
+                <div class="divider-ornament">🏵️</div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle">Handpicked Sets • Discover the perfect items selected for your most cherished life events.</p>
+        </div>
+        <div class="curated-grid reveal-on-scroll">
+            <div class="curated-item magnetic" data-strength="15">
+                <div class="curated-image"><img loading="lazy" decoding="async" src="assets/event_bg.png" alt="Wedding"></div>
+                <div class="curated-content">
+                    <h3>Weddings</h3>
+                    <h4>Grand Celebrations</h4>
+                    <p>Ethereal backdrops and brass essentials for a divine union.</p>
+                    <a href="#gallery" class="btn-text">View Collection <span>→</span></a>
+                </div>
+            </div>
+            <div class="curated-item magnetic" data-strength="15">
+                <div class="curated-image"><img loading="lazy" decoding="async" src="assets/event_1.png" alt="Temple"></div>
+                <div class="curated-content">
+                    <h3>Festivals</h3>
+                    <h4>Temple Celebrations</h4>
+                    <p>Traditional ornaments and floral garlands for spiritual grandeur.</p>
+                    <a href="#gallery" class="btn-text">View Collection <span>→</span></a>
+                </div>
+            </div>
+            <div class="curated-item magnetic" data-strength="15">
+                <div class="curated-image"><img loading="lazy" decoding="async" src="assets/lamps.png" alt="Pudhumanai Puguvizha"></div>
+                <div class="curated-content">
+                    <h3>Housewarming</h3>
+                    <h4>Pudhumanai Puguvizha</h4>
+                    <p>Auspicious decor and lighting to welcome prosperity into your home.</p>
+                    <a href="#gallery" class="btn-text">View Collection <span>→</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="process-section relative-z">
+        <div class="section-header text-center reveal-on-scroll">
+            <h2 class="section-title">
+                <span class="split-parent"><span class="split-child">How To</span></span>
+                <span class="split-parent"><span class="split-child italic-serif gradient-text">Purchase</span></span>
+            </h2>
+            <div class="section-divider">
+                <div class="divider-line"></div>
+                <div class="divider-ornament">🪔</div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle">Our simple 4-step process makes your shopping experience seamless • Experience a smooth journey from selection to doorstep.</p>
+        </div>
+        <div class="process-grid stagger-reveal reveal-on-scroll">
+            <div class="process-step reveal-on-scroll magnetic" data-strength="8">
+                <div class="step-number">01</div>
+                <h3>Explore</h3>
+                <p>Browse our collection of premium traditional and modern products • Discover the finest items for your celebration.</p>
+            </div>
+            <div class="process-step reveal-on-scroll magnetic" data-strength="8">
+                <div class="step-number">02</div>
+                <h3>Select</h3>
+                <p>Choose the products or curated sets that perfectly match your requirements • Select the items or complete
+                    DIY kits that suit your needs.</p>
+            </div>
+            <div class="process-step reveal-on-scroll magnetic" data-strength="8">
+                <div class="step-number">03</div>
+                <h3>Order</h3>
+                <p>Contact our team to confirm your selection and place your order • Reach out to us to finalize your purchase.</p>
+            </div>
+            <div class="process-step reveal-on-scroll magnetic" data-strength="8">
+                <div class="step-number">04</div>
+                <h3>Delivery</h3>
+                <p>Your premium supplies will be delivered safely to your doorstep • Experience secure and timely global shipping.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="vision-parallax relative-z">
+        <div class="vision-content reveal-on-scroll">
+            <h2 class="font-serif">"We don't just sell products; we provide the <span
+                    class="italic-serif text-gold">magic</span> needed for your cherished celebrations."</h2>
+        </div>
+    </section>
+
+    <section class="journal-section relative-z">
+        <div class="section-header text-center reveal-on-scroll">
+            <h2 class="section-title">
+                <span class="split-parent"><span class="split-child">Our</span></span>
+                <span class="split-parent"><span class="split-child italic-serif gradient-text">Journal</span></span>
+            </h2>
+            <div class="section-divider">
+                <div class="divider-line"></div>
+                <div class="divider-ornament">🪔</div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle">Insights into luxury product trends, color palettes, and cultural artistry • Deep dives into traditional excellence.</p>
+        </div>
+        <div class="journal-grid">
+            <article class="journal-card reveal-on-scroll">
+                <div class="journal-img-box">
+                    <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80" alt="Trends">
+                    <span class="journal-date">April 2024</span>
+                </div>
+                <div class="journal-info">
+                    <h3>2024 Decor Color Palettes: Beyond Traditional Maroon</h3>
+                    <p>The rise of sage green, burnt orange, and ivory in South Indian celebrations...</p>
+                    <a href="#" class="read-more">Read More <span>→</span></a>
+                </div>
+            </article>
+            <article class="journal-card reveal-on-scroll">
+                <div class="journal-img-box">
+                    <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1590766940554-634a7ed41450?auto=format&fit=crop&q=80" alt="Craft">
+                    <span class="journal-date">March 2024</span>
+                </div>
+                <div class="journal-info">
+                    <h3>Temple Theme Decor: A Cultural Revival</h3>
+                    <p>How our artisans bring ancient architectural wonders into modern celebration spaces...</p>
+                    <a href="#" class="read-more">Read More <span>→</span></a>
+                </div>
+            </article>
+            <article class="journal-card reveal-on-scroll">
+                <div class="journal-img-box">
+                    <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80" alt="Modern">
+                    <span class="journal-date">February 2024</span>
+                </div>
+                <div class="journal-info">
+                    <h3>Minimalist Decorations: Where Less is More Magic</h3>
+                    <p>Boho-chic, pampas grass, and subtle natural balloon decor items...</p>
+                    <a href="#" class="read-more">Read More <span>→</span></a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="testimonials-section relative-z">
+        <div class="section-header text-center reveal-on-scroll">
+            <h2 class="section-title">
+                <span class="split-parent"><span class="split-child">Happy</span></span>
+                <span class="split-parent"><span class="split-child italic-serif">Hearts</span></span>
+            </h2>
+            <div class="section-divider">
+                <div class="divider-line"></div>
+                <div class="divider-ornament">🪔</div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle">Real stories from families who trusted us with their sacred moments • Voices of our community.</p>
+        </div>
+        <div class="testimonials-track" id="testimonialTrack">
+            <div class="testimonial-card reveal-on-scroll">
+                <div class="stars">★★★★★</div>
+                <p>"The premium kuthuvilakkus we purchased were stunning. Every guest was in awe of their quality and
+                    traditional finish."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">P</div>
+                    <div><strong>Priya & Karthik</strong><span>Customer — Chennai</span></div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal-on-scroll">
+                <div class="stars">★★★★★</div>
+                <p>"The DIY balloon kit was perfect for my daughter's birthday! It had everything we needed and was so
+                    easy to set up."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">S</div>
+                    <div><strong>Sanjay Ramanathan</strong><span>Customer — Coimbatore</span></div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal-on-scroll">
+                <div class="stars">★★★★★</div>
+                <p>"The artificial marigold garlands completely transformed our home for Diwali. They look exactly like
+                    fresh flowers!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">M</div>
+                    <div><strong>Meena Sundaram</strong><span>Customer — Madurai</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section relative-z">
+        <div class="faq-container">
+            <div class="faq-left reveal-on-scroll">
+                <h2 class="section-title">
+                    <span class="split-parent"><span class="split-child">Frequently Asked</span></span>
+                    <span class="split-parent"><span
+                            class="split-child italic-serif text-maroon">Questions</span></span>
+                </h2>
+                <div class="section-divider" style="justify-content: flex-start; margin: 0 0 2rem;">
+                    <div class="divider-line" style="max-width: 100px;"></div>
+                    <div class="divider-ornament">🪔</div>
+                </div>
+                <p class="section-subtitle" style="margin: 0 0 2rem;">Everything you need to know about purchasing your dream celebration supplies • Get clarity on our products.</p>
+                <a href="https://wa.me/919788742627" target="_blank" class="btn-primary magnetic"
+                    data-strength="20">More Questions?</a>
+            </div>
+            <div class="faq-right reveal-on-scroll">
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h3>How long does delivery take?</h3><span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We typically process orders within 1-2 business days. Delivery across Tamil Nadu takes 3-5
+                            days, and nationwide shipping takes 5-7 business days.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h3>Do you provide installation services?</h3><span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We primarily provide premium DIY kits and high-quality standalone products that are very easy
+                            to assemble and set up yourself for any celebration.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h3>Do you ship nationwide?</h3><span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we ship our premium celebration supplies all across India. We ensure secure packaging
+                            for fragile items like brass lamps and neon signs.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h3>Can I customize the product packages?</h3><span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! You can mix and match items or contact our team to create a custom bundle that
+                            perfectly fits your specific celebration requirements.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners-section relative-z">
+        <div class="section-header text-center reveal-on-scroll">
+            <p class="badge magnetic text-maroon" data-strength="15"
+                style="background: rgba(128,0,0,0.05); border-color: rgba(128,0,0,0.1); font-weight: 700;">Elite Delivery
+                Partners</p>
+            <div class="section-divider">
+                <div class="divider-line"></div>
+                <div class="divider-ornament">🚚</div>
+                <div class="divider-line"></div>
+            </div>
+        </div>
+        <div class="marquee partners-marquee" style="margin-top: 2rem;">
+            <div class="marquee-content partners-track" style="animation-direction: reverse; animation-duration: 40s;">
+                <span>SWIGGY GENIE</span><span>•</span><span>ZOMATO</span><span>•</span><span>DUNZO</span><span>•</span><span>PORTER</span><span>•</span><span>BORZO</span><span>•</span><span>DELHIVERY</span><span>•</span><span>SHADOWFAX</span><span>•</span><span>BLUE DART</span><span>•</span><span>ECOM EXPRESS</span><span>•</span>
+                <span>SWIGGY GENIE</span><span>•</span><span>ZOMATO</span><span>•</span><span>DUNZO</span><span>•</span><span>PORTER</span><span>•</span><span>BORZO</span><span>•</span><span>DELHIVERY</span><span>•</span><span>SHADOWFAX</span><span>•</span><span>BLUE DART</span><span>•</span><span>ECOM EXPRESS</span><span>•</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="selection-guide-section relative-z" id="selection-guide">
+        <div class="section-header text-center reveal-on-scroll">
+            <h2 class="section-title">Choose Your <span class="italic-serif gradient-text">Experience</span></h2>
+            <div class="section-divider">
+                <div class="divider-line"></div>
+                <div class="divider-ornament">✨</div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle">Selection Guide • Find the perfect curation for your specific cultural celebration.</p>
+        </div>
+
+        <div class="selection-grid">
+            <!-- Veettu Sadangugal -->
+            <div class="selection-pillar reveal-on-scroll magnetic" data-strength="12">
+                <div class="pillar-overlay"></div>
+                <div class="pillar-img" style="background-image: url('https://images.unsplash.com/photo-1583939000240-690e17815336?auto=format&fit=crop&q=80')"></div>
+                <div class="pillar-content">
+                    <div class="pillar-tag">01</div>
+                    <h3>Home Rituals</h3>
+                    <h4>Traditional Gatherings</h4>
+                    <p>Designed for intimate family gatherings and spiritual poojas at home.</p>
+                    <div class="pillar-features">
+                        <span>• Compact Brassware</span>
+                        <span>• Fresh Floral Kits</span>
+                        <span>• Sacred Accessories</span>
+                    </div>
+                    <a href="#contact-us" class="pillar-btn">Select Vibe</a>
+                </div>
+            </div>
+
+            <!-- பெரிய Thirumanangal -->
+            <div class="selection-pillar reveal-on-scroll magnetic" data-strength="12">
+                <div class="pillar-overlay"></div>
+                <div class="pillar-img" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80')"></div>
+                <div class="pillar-content">
+                    <div class="pillar-tag">02</div>
+                    <h3>Grand Weddings</h3>
+                    <h4>Royal Celebrations</h4>
+                    <p>Comprehensive setups for large scale celebrations and venue transformations.</p>
+                    <div class="pillar-features">
+                        <span>• Life-size Statues</span>
+                        <span>• Luxury Backdrops</span>
+                        <span>• Full Event Curation</span>
+                    </div>
+                    <a href="#contact-us" class="pillar-btn">Select Vibe</a>
+                </div>
+            </div>
+
+            <!-- Corporate Cultural -->
+            <div class="selection-pillar reveal-on-scroll magnetic" data-strength="12">
+                <div class="pillar-overlay"></div>
+                <div class="pillar-img" style="background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80')"></div>
+                <div class="pillar-content">
+                    <div class="pillar-tag">03</div>
+                    <h3>Corporate Events</h3>
+                    <h4>Professional Cultural</h4>
+                    <p>Professional yet traditional aesthetics for office inaugurations and festive meets.</p>
+                    <div class="pillar-features">
+                        <span>• Minimalist Brass</span>
+                        <span>• Modern Backdrop Mix</span>
+                        <span>• Branding Integration</span>
+                    </div>
+                    <a href="#contact-us" class="pillar-btn">Select Vibe</a>
+                </div>
+            </div>
+
+            <!-- Thanippayan Boutique -->
+            <div class="selection-pillar reveal-on-scroll magnetic" data-strength="12">
+                <div class="pillar-overlay"></div>
+                <div class="pillar-img" style="background-image: url('https://images.unsplash.com/photo-1605808361706-a41eb6064121?auto=format&fit=crop&q=80')"></div>
+                <div class="pillar-content">
+                    <div class="pillar-tag">04</div>
+                    <h3>Custom Boutique</h3>
+                    <h4>Bespoke Creations</h4>
+                    <p>Work with our artisans to create a completely unique setup for your vision.</p>
+                    <div class="pillar-features">
+                        <span>• Bespoke Designs</span>
+                        <span>• Unique Artifacts</span>
+                        <span>• One-on-one Styling</span>
+                    </div>
+                    <a href="#contact-us" class="pillar-btn">Select Vibe</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section id="contact-us" class="contact-section-v4 relative-z">
+        <div class="container">
+            <div class="section-header text-center reveal-on-scroll">
+                <h2 class="section-title">Get In <span class="italic-serif text-maroon">Touch</span></h2>
+                <div class="section-divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-ornament">🪔</div>
+                    <div class="divider-line"></div>
+                </div>
+                <p class="section-subtitle">Have a question or ready to purchase? We'd love to hear from you.</p>
+            </div>
+
+            <div class="contact-v4-grid">
+                <div class="contact-v4-info reveal-on-scroll">
+                    <div class="info-card">
+                        <div class="info-item">
+                            <div class="info-icon">📍</div>
+                            <div class="info-text">
+                                <h4>Our Studio</h4>
+                                <p>No. 12, Temple Street, Mylapore, Chennai - 600004</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">📞</div>
+                            <div class="info-text">
+                                <h4>Call Us</h4>
+                                <p>+91 97887 42627</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">✉️</div>
+                            <div class="info-text">
+                                <h4>Email Us</h4>
+                                <p>hello@vanakamvandhanam.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-v4-form-box reveal-on-scroll">
+                    <form class="v4-form contact-form-premium">
+                        <div class="form-row">
+                            <input type="text" placeholder="Name" required>
+                            <input type="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-row">
+                            <input type="tel" placeholder="Phone Number" required>
+                            <input type="text" placeholder="Product Interest (e.g. Brass Lamps)" required>
+                        </div>
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                        <button type="submit" class="btn-primary w-full magnetic glow-effect">Send Enquiry</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer relative-z">
+        <div class="footer-bg-animation"></div>
+        <div class="footer-top">
+            <div class="footer-brand reveal-on-scroll">
+                <img loading="lazy" decoding="async" src="logo.png" alt="Vanakkam Vandhanam Logo - வணக்கம்! வந்தனம்"
+                    style="height: 100px; width: auto; margin-bottom: 1rem; filter: drop-shadow(0 2px 10px rgba(255,179,0,0.3)); background: white; padding: 10px; border-radius: 10px;">
+                <h2 class="font-serif">Vanakkam <span class="text-gold">Vandhanam</span></h2>
+                <p>Parambariya Panbattu Marabudan Ninaivugalai Padaikkirom • Crafting memories with rich heritage and modern
+                    luxury.</p>
+            </div>
+            <div class="footer-links reveal-on-scroll">
+                <h3>Quick Links</h3>
+                <a href="#gallery" class="magnetic" data-strength="10">Products</a>
+                <a href="#services" class="magnetic" data-strength="10">Categories</a>
+                <a href="#contact-us" class="magnetic" data-strength="10">Contact Us</a>
+            </div>
+            <div class="footer-contact reveal-on-scroll">
+                <h3>Stay Connected</h3>
+                <p>Email: hello@vanakamvandhanam.com</p>
+                <p>Phone: +91 97887 42627</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/" target="_blank" class="magnetic" data-strength="20" title="Instagram">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="https://www.facebook.com/" target="_blank" class="magnetic" data-strength="20" title="Facebook">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+                    </a>
+                    <a href="https://wa.me/919788742627" target="_blank" class="magnetic" data-strength="20" title="WhatsApp">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Vanakkam Vandhanam. All Rights Reserved • Traditional Excellence.</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" title="Back to Top">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+        </svg>
+    </button>
+
+    <!-- AI Stylist Modal -->
+    <div class="modal-overlay" id="stylistModal">
+        <div class="modal-content">
+            <button class="close-modal magnetic" data-strength="15">&times;</button>
+            <div class="modal-header">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="var(--accent-gold)">
+                    <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
+                </svg>
+                <h3>Smart Product Guide</h3>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <p class="italic">Describe your vision, and let our AI suggest the perfect product collection.</p>
+                <div class="input-group">
+                    <label>Celebration Type</label>
+                    <input type="text" id="aiEvent" placeholder="e.g. Parambariyam Home Decor">
+                </div>
+                <div class="input-group">
+                    <label>Palette & Vibe</label>
+                    <input type="text" id="aiPalette" placeholder="e.g. Royal Maroon & Gold">
+                </div>
+                <button class="btn-primary w-full magnetic" data-strength="20" id="generateBtn">Create the Magic</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919788742627" target="_blank" class="floating-wa magnetic" data-strength="30">
+        <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+        </svg>
+    </a>
+
+    <!-- Image Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <img src="" alt="Lightbox" id="lightboxImg">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15" />
+        </svg>
+    </button>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>
